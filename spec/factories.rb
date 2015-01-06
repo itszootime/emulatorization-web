@@ -53,27 +53,25 @@ def get_run
 end
 
 FactoryGirl.define do
-  
   factory :emulator_project do
-
-    factory :new_ep do |f|
-      f.simulator_specification { get_simulator_specification }
-    end
-
-    factory :trained_ep do |f|
-      user
-      simulator_specification { get_simulator_specification }
-      design { get_design }
-      run { get_run }
-      emulator
-      validation { Validation.create(design_size: 11) }
-    end
+    user
+    simulator_specification { get_simulator_specification }
   end
 
-  factory :validation_project do
+  factory :trained_emulator_project, class: EmulatorProject do
     user
-    name 'Samples'
+    simulator_specification { get_simulator_specification }
+    design { get_design }
+    run { get_run }
+    emulator
     validation
+
+    after(:create) do |project|
+      project.design.save
+      project.run.save
+      project.emulator.save
+      project.validation.save
+    end
   end
 
   factory :validation do
@@ -248,19 +246,23 @@ FactoryGirl.define do
 {"members"=>[93.382233,99.865273,111.58324,100.14807,91.960281,113.63783,90.552635,97.535645,94.624855,115.84525,107.84233,80.375931,94.227898,112.16795,118.60474,96.017792,114.81535,101.69842,95.394951,119.80996,95.940742,111.06467,105.66679,98.106606,88.727371,100.66708,99.243675,119.99886,100.73701,100.39169,110.13517,66.898827,109.24002,115.19268,110.31074,91.488083,96.085411,88.146423,97.428192,110.85361,77.38195,92.686035,92.307701,119.09736,110.27351,110.86671,93.425964,90.696915,100.47826,104.60579]}]
   end
 
+  sequence :email do |n|
+    "user-#{n}@uncertweb.org"
+  end
+
   factory :user do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     password 'password'
-    email { Faker::Internet.email }
+    email
   end
 
   factory :another_user, class: User do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     password 'password'
-    email { Faker::Internet.email }
-  end 
+    email
+  end
 
   factory :emulator do
     output { get_output_result }

@@ -1,6 +1,3 @@
-require 'spec_helper'
-require 'emulatorization'
-
 RSpec::Matchers.define :be_valid_plot_data do
   match do |actual|
     actual.instance_of?(Hash) && actual.has_key?("x") && actual.has_key?("y")
@@ -9,8 +6,11 @@ end
 
 describe Validation do
 
-  let(:project) { FactoryGirl.create(:validation_project) }
-  let(:validation) { project.validation }
+  let(:validation) { FactoryGirl.create(:validation) }
+
+  describe "#calculate_defaults" do
+    it "sets a default design_size"
+  end
 
   describe "#generate" do
     describe "returned hash" do

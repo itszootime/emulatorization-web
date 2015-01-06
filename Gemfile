@@ -30,6 +30,7 @@ gem 'rmagick', '2.13.2'
 
 # Test
 group :development, :test do
+  gem 'debugger'
   gem 'rspec-rails', '~> 2.12.0'
   gem 'spork', '0.9.2'
 end
@@ -39,7 +40,7 @@ group :test do
   gem 'faker'
   gem 'mongoid-rspec'
   gem 'database_cleaner'
-  gem 'capybara'
+  gem 'capybara', '~> 2.4'
 end
 
 # Asset related

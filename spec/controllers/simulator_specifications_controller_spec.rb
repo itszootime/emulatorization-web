@@ -1,10 +1,8 @@
-require 'spec_helper'
-
 describe SimulatorSpecificationsController do
 
-  let(:project) { FactoryGirl.create(:trained_ep) }
+  let(:project) { FactoryGirl.create(:emulator_project) }
   let(:spec) { project.simulator_specification }
-  
+
   before(:each) { sign_in project.user }
 
   describe 'GET #edit' do
@@ -13,7 +11,7 @@ describe SimulatorSpecificationsController do
         get :edit, emulator_project_id: project, id: spec
         assigns(:project).should == project
       end
-    
+
       it 'assigns the requested simulator specification to @spec' do
         get :edit, emulator_project_id: project, id: spec
         assigns(:spec).should == spec

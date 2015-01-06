@@ -1,8 +1,6 @@
-require 'spec_helper'
-
 describe InputsController do
 
-  let(:project) { FactoryGirl.create(:trained_ep) }
+  let(:project) { FactoryGirl.create(:emulator_project) }
   let(:spec) { project.simulator_specification }
   let(:input) { spec.inputs.first }
 
