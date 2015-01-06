@@ -1,7 +1,9 @@
 source 'http://rubygems.org'
+ruby '1.9.3'
 
 gem 'rails', '~> 3.2.11'
 
+gem 'foreman'
 gem 'simple_form'
 
 # Web server
@@ -24,7 +26,7 @@ gem 'cancan'
 
 # Uploads
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
-gem 'rmagick'
+gem 'rmagick', '2.13.2'
 
 # Test
 group :development, :test do
@@ -37,10 +39,11 @@ group :test do
   gem 'faker'
   gem 'mongoid-rspec'
   gem 'database_cleaner'
+  gem 'capybara'
 end
 
 # Asset related
-gem 'therubyracer'
+gem 'therubyracer', '0.12.1'
 gem 'jquery-rails'
 
 group :assets do
