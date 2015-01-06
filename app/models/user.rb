@@ -49,6 +49,8 @@ class User
   field :first_name, type: String
   field :last_name, type: String
 
+  validates_presence_of :first_name, :last_name
+
   attr_accessible :email, :password, :first_name, :last_name
 
   def full_name
